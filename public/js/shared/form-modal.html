@@ -1,0 +1,55 @@
+<div class="modal-header">
+  <h3 class="modal-title">{{ vm.options.title }}</h3>
+</div>
+<div class="modal-body">
+  <form class="form-horizontal">
+    <div class="form-group">
+      <label for="name" class="col-sm-2 control-label">Name</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="name" placeholder="Name" ng-model="vm.inputs.name">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="role" class="col-sm-2 control-label">Role</label>
+      <div class="col-sm-10">
+        <select class="form-control" id="role" ng-options="role.id as role.name for role in vm.defaults.roles" ng-model="vm.inputs.role_id"></select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="username" class="col-sm-2 control-label">Username</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="username" placeholder="Username" ng-model="vm.inputs.username">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="password" class="col-sm-2 control-label">Password</label>
+      <div class="col-sm-10">
+        <input type="password" class="form-control" id="password" placeholder="Password"
+        ng-model="vm.inputs.password">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2 control-label">Countries</label>
+      <div class="col-sm-10 checkbox">
+          <label style="margin-right:7px;" ng-repeat="country in vm.defaults.countries">
+            <input type="checkbox"> {{ country.name }}
+          </label>
+      </div>
+    </div>
+    <div class="form-group">
+      <hr>
+      <label class="col-sm-4 col-sm-offset-4 control-label">Country Permissions</label>
+    </div>
+    <div class="form-group">
+      <label for="ph" class="col-sm-2 control-label">Philippines</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="ph" placeholder="Permissions"
+        ng-model="vm.inputs.password">
+      </div>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-primary" type="button" ng-click="vm.ok()">Save</button>
+  <button class="btn btn-warning" type="button" ng-click="vm.cancel()">Cancel</button>
+</div>
