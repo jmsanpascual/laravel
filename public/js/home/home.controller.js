@@ -92,7 +92,9 @@
                         roles: vm.roles,
                         countries: vm.countries
                     },
-                    inputs: {role_id: vm.roles[0].id}
+                    inputs: {
+                        role_id: vm.roles[0].id
+                    }
                 };
 
                 modal.form(params).then(function (result) {
