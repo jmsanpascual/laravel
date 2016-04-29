@@ -3,12 +3,12 @@
 
     angular
         .module('app')
-        .factory('role', role);
+        .factory('Role', Role);
 
-    role.$inject = ['$resource'];
+    Role.$inject = ['$resource'];
 
     /* @ngInject */
-    function role($resource) {
+    function Role($resource) {
         var resource = new $resource('role/:id', {id: '@id'});
 
         return resource;

@@ -1,8 +1,9 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\AccessRight;
-class AccessRightsTableSeeder extends Seeder
+use App\Permission;
+
+class PermissionsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,10 +13,10 @@ class AccessRightsTableSeeder extends Seeder
     public function run()
     {
         DB::statement('SET FOREIGN_KEY_CHECKS = 0');
-        AccessRight::truncate(); // rollback
+        Permission::truncate(); // rollback
         DB::statement('SET FOREIGN_KEY_CHECKS = 1');
 
-        $accessRights = [
+        $permissions = [
             [
                 'bit' => 1,
                 'name' => 'Add'
@@ -35,11 +36,11 @@ class AccessRightsTableSeeder extends Seeder
         ];
 
         $now = DB::raw('CURRENT_TIMESTAMP');
-        foreach($accessRights as $key => $val) {
-            $accessRights[$key]['created_at'] = $now;
-            $accessRights[$key]['updated_at'] = $now;
+        foreach($permissions as $key => $val) {
+            $permissions[$key]['created_at'] = $now;
+            $permissions[$key]['updated_at'] = $now;
         }
 
-        AccessRight::insert($accessRights);
+        Permission::insert($permissions);
     }
 }

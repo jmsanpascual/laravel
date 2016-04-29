@@ -3,12 +3,12 @@
 
     angular
         .module('app')
-        .factory('user', user);
+        .factory('User', User);
 
-    user.$inject = ['$resource'];
+    User.$inject = ['$resource'];
 
     /* @ngInject */
-    function user($resource) {
+    function User($resource) {
         var resource = new $resource('user/:id', {id: '@id'}, {
             update: {
                 method: 'PUT',

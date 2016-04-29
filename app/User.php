@@ -32,6 +32,11 @@ class User extends Authenticatable
         return $this->belongsTo('App\Role');
     }
 
+    public function regions()
+    {
+        return $this->hasMany('App\UserRegionAccess');
+    }
+
     public function getUserWithRole()
     {
         return $this->where('id', $this->id)->with('role')->first();

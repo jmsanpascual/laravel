@@ -47,6 +47,7 @@ class Handler extends ExceptionHandler
     public function render($request, Exception $e)
     {
         if ($e instanceof \PDOException) {
+            \DB::enableQueryLog();
             logger(json_encode(\DB::getQueryLog()));
             return response()->make(['error' => 'Unable to proccess you\'re request.']);
         }

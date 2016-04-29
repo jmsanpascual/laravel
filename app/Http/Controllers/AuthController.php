@@ -10,7 +10,7 @@ use App\Exceptions\ResponseException;
 
 class AuthController extends Controller
 {
-    function login(Request $request)
+    public function login(Request $request)
     {
         $credentials = $request->all();
 
@@ -21,7 +21,7 @@ class AuthController extends Controller
         }
     }
 
-    function logout()
+    public function logout()
     {
         Auth::logout();
         return redirect('/');

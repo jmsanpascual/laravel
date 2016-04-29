@@ -16,7 +16,8 @@ Home
 @section('scripts')
 <script src="{{ asset('js/home/home.controller.js') }}"></script>
 <script src="{{ asset('js/home/role.factory.js') }}"></script>
-<script src="{{ asset('js/home/country.factory.js') }}"></script>
+<script src="{{ asset('js/home/permission.factory.js') }}"></script>
+<script src="{{ asset('js/home/region.factory.js') }}"></script>
 <script src="{{ asset('js/shared/modal-instance.controller.js') }}"></script>
 <script src="{{ asset('js/shared/modal.factory.js') }}"></script>
 <script src="{{ asset('js/shared/user.factory.js') }}"></script>

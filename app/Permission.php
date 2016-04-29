@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class AccessRight extends Model
+class Permission extends Model
 {
   /**
      * The attributes that should be hidden for arrays.

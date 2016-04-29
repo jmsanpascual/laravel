@@ -9,7 +9,7 @@ use App\Role;
 
 class RoleController extends Controller
 {
-    function index(Role $role)
+    public function index(Role $role)
     {
         return $role->all();
     }

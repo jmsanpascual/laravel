@@ -22,14 +22,17 @@ Route::post('datatable', function () {
     return request()->all();
 });
 
-Route::group(['middleware' => ['auth']], function () {
+Route::group(['middleware' => ['auth', 'ajax']], function () {
     Route::resource('user', 'UserController', [
         'only' => ['index', 'store', 'update', 'destroy']
     ]);
     Route::resource('role', 'RoleController', [
         'only' => ['index']
     ]);
-    Route::resource('country', 'CountryController', [
+    Route::resource('region', 'RegionController', [
+        'only' => ['index']
+    ]);
+    Route::resource('permission', 'PermissionController', [
         'only' => ['index']
     ]);
 });

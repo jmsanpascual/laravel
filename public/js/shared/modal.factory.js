@@ -17,7 +17,11 @@
             controller: 'ModalInstanceController',
             controllerAs: 'vm',
             size: 'md',
-            resolve: {options: angular.noop}
+            resolve: {
+                options: angular.noop,
+                defaults: angular.noop,
+                inputs: angular.noop
+            }
         };
 
         return modal;

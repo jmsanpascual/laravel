@@ -37,18 +37,18 @@ class UsersTableSeeder extends Seeder
             $users[$key]['updated_at'] = $now;
         }
 
-        for ($i = 0; $i < 500; $i++) {
-            $temp = [
-                'role_id' => 2,
-                'name' => 'test',
-                'username' => 'test' . $i,
-                'password' => 'test',
-                'created_at' => $now,
-                'updated_at' => $now,
-            ];
-
-            array_push($users, $temp);
-        }
+        // for ($i = 0; $i < 500; $i++) {
+        //     $temp = [
+        //         'role_id' => 2,
+        //         'name' => 'test',
+        //         'username' => 'test' . $i,
+        //         'password' => 'test',
+        //         'created_at' => $now,
+        //         'updated_at' => $now,
+        //     ];
+        //
+        //     array_push($users, $temp);
+        // }
 
         User::insert($users);
     }

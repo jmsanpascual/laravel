@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCountriesTable extends Migration
+class CreatePermissionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,8 +12,8 @@ class CreateCountriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('countries', function (Blueprint $table) {
-            $table->increments('id');
+        Schema::create('permissions', function (Blueprint $table) {
+            $table->integer('bit')->unsigned();
             $table->string('name');
             $table->timestamps();
         });
@@ -26,6 +26,6 @@ class CreateCountriesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('countries');
+        Schema::drop('permissions');
     }
 }

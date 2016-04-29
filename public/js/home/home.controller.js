@@ -11,21 +11,22 @@
         '$cookies',
         'DTOptionsBuilder',
         'DTColumnBuilder',
-        'role',
-        'country',
-        'user',
+        'Role',
+        'Region',
+        'Permission',
+        'User',
         'modal',
         'toast'
     ];
 
     /* @ngInject */
-    function HomeController($scope, $compile, $cookies, DTOptionsBuilder, DTColumnBuilder,
-        role, country, user, modal, toast) {
+    function HomeController($scope, $compile, $cookies, DTOptionsBuilder,
+        DTColumnBuilder, Role, Region, Permission, User, modal, toast) {
 
         var vm = this;
+        var defaults = {};
+
         vm.users = {};
-        vm.roles = [];
-        vm.countries = [];
         vm.dtInstance = {};
 
         activate();
@@ -74,32 +75,37 @@
                     .notSortable().renderWith(actionsHtml)
             ];
 
-            role.query().$promise.then(function (roles) {
-                vm.roles = roles;
+            Role.query().$promise.then(function (roles) {
+                defaults.roles = roles;
             });
 
-            country.query().$promise.then(function (countries) {
-                vm.countries = countries;
+            Region.query().$promise.then(function (regions) {
+                defaults.regions = regions;
+            });
+
+            Permission.query().$promise.then(function (permissions) {
+                defaults.permissions = permissions;
             });
 
             function getUsers() {
-                return user.query().$promise;
+                return User.query().$promise;
             }
 
             function addUser(e, dt, node, config) {
                 var params = {
-                    defaults: {
-                        roles: vm.roles,
-                        countries: vm.countries
-                    },
+                    defaults: defaults,
                     inputs: {
-                        role_id: vm.roles[0].id
+                        role_id: defaults.roles[0].id
                     }
                 };
 
                 modal.form(params).then(function (result) {
-                    var newUser = new user(result.inputs);
-                    console.log(newUser);
+                    var newUser = new User(result.inputs);
+                    newUser.$save(function () {
+                        vm.dtInstance.reloadData(angular.noop, false);
+                    }, function (errorMsg) {
+                        toast.error(errorMsg);
+                    });
                 });
             }
 
@@ -123,10 +129,10 @@
             // Edit some data and call server to make changes...
             // Then reload the data so that DT is refreshed
             var params = {
-                defaults: {roles: vm.roles},
+                defaults: defaults,
                 inputs: user
             };
-
+            console.log(user);
             modal.form(params).then(function (result) {
                 user = result.inputs;
                 user.$update().then(function () {
@@ -143,7 +149,7 @@
                 // then reload the data so that DT is refreshed
                 user.$delete().then(function () {
                     vm.dtInstance.reloadData(angular.noop, false);
-                    toast.success(result.message);
+                    toast.success(result.options.message);
                 }, function (errorMsg) {
                     toast.error(errorMsg);
                 });

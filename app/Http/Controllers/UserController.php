@@ -6,31 +6,45 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\User;
+use App\UserRegionAccess;
 
 class UserController extends Controller
 {
-    function index(User $user)
+    protected $user;
+
+    public function __construct(User $user)
     {
-        return $user->with('role')->get();
+        $this->user = $user;
     }
 
-    function store(User $user, Request $request)
+    public function index()
     {
-        logger($request->all());
+        return $this->user->with('role')->with('regions')->get();
     }
 
-    function update(User $user, Request $request)
+    public function store(UserRegionAccess $regionAccess, Request $request)
     {
-        $userData = $request->all();
-        $user->fill($userData);
-        $user->save();
+        $user = $request->except('regions');
+        $regions = $request->input('regions');
 
-        return $user->getUserWithRole();
+        $newUser = $this->user->create($user);
+        $regionPermissions = $regionAccess->buildPermissions($newUser->id, $regions);
+        $regionAccess->insert($regionPermissions);
+        return;
     }
 
-    function destroy($id)
+    public function update(Request $request)
     {
-        User::where('id', $id)->delete();
+        $user = $request->all();
+        $this->user->fill($user);
+        $this->user->save();
+
+        return $this->user->getUserWithRole();
+    }
+
+    public function destroy($id)
+    {
+        $this->user->where('id', $id)->delete();
         return;
     }
 }

@@ -1,9 +1,9 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Country;
+use App\Region;
 
-class CountriesTableSeeder extends Seeder
+class RegionsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,10 +13,10 @@ class CountriesTableSeeder extends Seeder
     public function run()
     {
         DB::statement('SET FOREIGN_KEY_CHECKS = 0');
-        Country::truncate();
+        Region::truncate();
         DB::statement('SET FOREIGN_KEY_CHECKS = 1');
 
-        $countries = [
+        $regions = [
             [
                 'name' => 'Philippines'
             ],
@@ -32,11 +32,11 @@ class CountriesTableSeeder extends Seeder
         ];
 
         $now = DB::raw('CURRENT_TIMESTAMP');
-        foreach($countries as $key => $val) {
-            $countries[$key]['created_at'] = $now;
-            $countries[$key]['updated_at'] = $now;
+        foreach($regions as $key => $val) {
+            $regions[$key]['created_at'] = $now;
+            $regions[$key]['updated_at'] = $now;
         }
 
-        Country::insert($countries);
+        Region::insert($regions);
     }
 }

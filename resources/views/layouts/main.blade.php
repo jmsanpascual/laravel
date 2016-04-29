@@ -11,6 +11,7 @@
         <link rel="stylesheet" href="{{ asset('node_modules/datatables/plugins/buttons.bootstrap.min.css') }}">
         <link href="{{ asset('node_modules/angular-datatables/dist/plugins/bootstrap/datatables.bootstrap.min.css') }}" rel="stylesheet" type="text/css">
         <link rel="stylesheet" href="{{ asset('node_modules/datatables/plugins/fixedHeader.dataTables.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('node_modules/angular-ui-select/select.min.css') }}">
 
         <style>
             /* Compliment for the navbar fixed top */
@@ -39,6 +40,7 @@
         <script src="{{ asset('node_modules/angular/angular.min.js') }}"></script>
         <script src="{{ asset('node_modules/angular-resource/angular-resource.min.js') }}"></script>
         <script src="{{ asset('node_modules/angular-cookies/angular-cookies.min.js') }}"></script>
+        <script src="{{ asset('node_modules/angular-ui-select/select.min.js') }}"></script>
         <script src="{{ asset('node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js') }}"></script>
         <script src="{{ asset('node_modules/datatables/media/js/jquery.dataTables.min.js') }}"></script>
         <script src="{{ asset('node_modules/angular-datatables/dist/angular-datatables.min.js') }}"></script>

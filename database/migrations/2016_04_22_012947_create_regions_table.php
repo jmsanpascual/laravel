@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAccessRightsTable extends Migration
+class CreateRegionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,8 +12,8 @@ class CreateAccessRightsTable extends Migration
      */
     public function up()
     {
-        Schema::create('access_rights', function (Blueprint $table) {
-            $table->integer('bit')->unsigned();
+        Schema::create('regions', function (Blueprint $table) {
+            $table->increments('id');
             $table->string('name');
             $table->timestamps();
         });
@@ -26,6 +26,6 @@ class CreateAccessRightsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('access_rights');
+        Schema::drop('regions');
     }
 }
