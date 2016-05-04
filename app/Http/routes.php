@@ -11,15 +11,33 @@
 |
 */
 
-Route::get('/', function () {
-    if (Auth::check()) return view('home');
+Route::get('/', function (App\Role $role) {
+    if (Auth::check()) {
+        if (Auth::user()->role->name == 'Admin') {
+            return redirect('accounts');
+        } else {
+            return redirect('infos');
+        }
+    }
+
     return view('login');
 });
 
 Route::post('login', 'AuthController@login');
 Route::get('logout', 'AuthController@logout');
-Route::post('datatable', function () {
-    return request()->all();
+// Route::post('datatable', function () {
+//     return request()->all();
+// });
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('accounts', function () {
+        if (Auth::user()->role->name != 'Admin') return view('errors.404');
+        return view('accounts');
+    });
+
+    Route::get('infos', function () {
+        return view('infos');
+    });
 });
 
 Route::group(['middleware' => ['auth', 'ajax']], function () {

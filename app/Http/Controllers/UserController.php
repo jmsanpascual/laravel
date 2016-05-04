@@ -5,8 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UpdateUserRequest;
 use App\User;
-use App\UserRegionAccess;
 
 class UserController extends Controller
 {
@@ -19,32 +20,47 @@ class UserController extends Controller
 
     public function index()
     {
-        return $this->user->with('role')->with('regions')->get();
+        return $this->user->with('role', 'regions')->get();
     }
 
-    public function store(UserRegionAccess $regionAccess, Request $request)
+    public function store(StoreUserRequest $request)
     {
-        $user = $request->except('regions');
+        $userInfo = $request->except('regions', 'role');
         $regions = $request->input('regions');
 
-        $newUser = $this->user->create($user);
-        $regionPermissions = $regionAccess->buildPermissions($newUser->id, $regions);
-        $regionAccess->insert($regionPermissions);
-        return;
+        $user = $this->user->create($userInfo);
+
+        // Build the permission and insert in the pivot table
+        $permissions = $user->regions()->buildPermissions($regions);
+        $user->regions()->attach($permissions);
+
+        $message = trans('messages.create', ['name' => $user->name]);
+        return compact('message');
     }
 
-    public function update(Request $request)
+    public function update(UpdateUserRequest $request, $id)
     {
-        $user = $request->all();
-        $this->user->fill($user);
-        $this->user->save();
+        $userInfo = $request->except('regions', 'role');
+        $regions = $request->input('regions');
 
-        return $this->user->getUserWithRole();
+        // Find and update the user
+        $user = $this->user->find($id);
+        $user->update($userInfo);
+
+        // Build the permission and update the pivot table
+        $permissions = $user->regions()->buildPermissions($regions);
+        $user->regions()->sync($permissions);
+
+        $message = trans('messages.update', ['name' => $user->name]);
+        return compact('message');
     }
 
     public function destroy($id)
     {
-        $this->user->where('id', $id)->delete();
-        return;
+        $user = $this->user->find($id);
+        $user->delete();
+
+        $message = trans('messages.delete', ['name' => $user->name]);
+        return compact('message');
     }
 }

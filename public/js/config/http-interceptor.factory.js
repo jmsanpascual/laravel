@@ -27,8 +27,32 @@
         }
 
         function responseError(response) {
-            $log.error('Server Error:', response);
-            return $q.reject('Unknown error occured.');
+            var errorMessage = 'Unknown error occured.';
+
+            switch (response.status) {
+                case 403:
+                    errorMessage = 'Sorry, you have no permission.'
+                    break;
+                case 422:
+                    errorMessage = buildErrorMessage(response.data);
+                    break;
+                default:
+                    $log.error('Server Error:', response);
+            }
+
+            return $q.reject(errorMessage);
+
+            // Concats the array of object errors returned by laravel
+            function buildErrorMessage(errors) {
+                var message = '';
+
+                for (var field in errors) {
+                    message += errors[field].pop();
+                    message += '<br>';
+                }
+
+                return message;
+            }
         }
     }
 })();

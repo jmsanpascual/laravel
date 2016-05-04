@@ -119,10 +119,10 @@
 
             function actionsHtml(data, type, full, meta) {
                 vm.users[data.id] = data;
-                return '<button class="btn btn-success" ng-click="hc.edit(hc.users[' + data.id + '])">' +
+                return '<button class="btn btn-success" ng-click="ac.edit(ac.users[' + data.id + '])">' +
                     '   <i class="fa fa-edit"></i>' +
                     '</button>&nbsp;' +
-                    '<button class="btn btn-danger" ng-click="hc.delete(hc.users[' + data.id + '])" )"="">' +
+                    '<button class="btn btn-danger" ng-click="ac.delete(ac.users[' + data.id + '])" )"="">' +
                     '   <i class="fa fa-trash-o"></i>' +
                     '</button>';
             }

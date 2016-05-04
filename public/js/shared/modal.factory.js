@@ -29,9 +29,7 @@
         function confirmation(name) {
             config.templateUrl = 'js/shared/confirmation-modal.html';
             config.resolve.options = callback({
-                title: 'Delete Confirmation',
-                name: name,
-                message: name + ' was successfully deleted.'
+                title: 'Delete Confirmation'
             });
 
             return $uibModal.open(config).result;
@@ -43,7 +41,6 @@
             config.resolve.inputs = callback(params.inputs);
             config.resolve.options = callback ({
                 title: 'Account Information'
-                // message: name + ' was successfully added.'
             });
 
             return $uibModal.open(config).result;

@@ -32,7 +32,7 @@
       <label class="col-sm-2 control-label">Regions</label>
       <div class="col-sm-10 checkbox">
           <label style="margin-right:7px;" ng-repeat="region in vm.defaults.regions">
-            <input type="checkbox" ng-model="vm.inputs.regions[region.id]" ng-checked="vm.inputs.regions[$index]" ng-true-value="{{ region }}" ng-false-value="{{ undefined }}"> {{ region.name }}
+            <input type="checkbox" ng-model="vm.inputs.regions[$index]" ng-true-value="{{ region }}" ng-false-value="undefined"> {{ region.name }}
           </label>
       </div>
     </div>
@@ -41,7 +41,7 @@
         {{ region.name }}
       </label>
       <div class="col-sm-8">
-        <ui-select multiple ng-model="vm.inputs.regions[region.id].permissions" theme="bootstrap" sortable="true" close-on-select="false">
+        <ui-select multiple ng-model="vm.inputs.regions[$index].permissions" theme="bootstrap" sortable="true" close-on-select="false">
           <ui-select-match class="ui-select-match" placeholder="Permissions">
             {{ $item.name }}
           </ui-select-match>

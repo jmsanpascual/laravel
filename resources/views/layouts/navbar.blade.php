@@ -14,17 +14,18 @@
 
     <div class="navbar-collapse" ng-class="{collapse: isCollapsed}">
       <ul class="nav navbar-nav">
-        @if (auth()->user()->role_id == App\Role::role('admin')->first()->id)
-          <li><a href="#">Admin</a></li>
+        @if (auth()->user()->role->name == 'Admin')
+          <li><a href="accounts">Admin</a></li>
         @endif
-        <li><a href="#">User</a></li>
+        <li><a href="infos">User</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li uib-dropdown>
-          <a href="#" uib-dropdown-toggle role="button" aria-haspopup="true" aria-expanded="false">
+          <a uib-dropdown-toggle role="button" aria-haspopup="true" aria-expanded="false">
             {{ auth()->user()->name }}
-            <span class="caret"></span></a>
-          <ul uib-dropdown-menu ng-cloak>
+            <span class="caret"></span>
+          </a>
+          <ul class="ng-cloak" uib-dropdown-menu>
             <li><a href="logout">Logout</a>
           </ul>
         </li>

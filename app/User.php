@@ -34,7 +34,9 @@ class User extends Authenticatable
 
     public function regions()
     {
-        return $this->hasMany('App\UserRegionAccess');
+        return $this->belongsToMany('App\Region', 'user_region_access')
+            ->withPivot(['permission'])
+            ->withTimestamps();
     }
 
     public function getUserWithRole()

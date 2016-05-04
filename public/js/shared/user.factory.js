@@ -12,7 +12,8 @@
         var resource = new $resource('user/:id', {id: '@id'}, {
             update: {
                 method: 'PUT',
-                transformRequest: updateTransformRequest
+                // Already solved in the server side
+                // transformRequest: updateTransformRequest
             }
         });
 

@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\UserRegionAccess;
 
 class UserRegionAccessSeeder extends Seeder
 {
@@ -12,8 +11,10 @@ class UserRegionAccessSeeder extends Seeder
      */
     public function run()
     {
+        $table = DB::table('user_region_access');
+
         DB::statement('SET FOREIGN_KEY_CHECKS = 0');
-        UserRegionAccess::truncate();
+        $table->truncate();
         DB::statement('SET FOREIGN_KEY_CHECKS = 1');
 
         $regionAccess = [
@@ -41,6 +42,6 @@ class UserRegionAccessSeeder extends Seeder
             $regionAccess[$key]['updated_at'] = $now;
         }
 
-        UserRegionAccess::insert($regionAccess);
+        $table->insert($regionAccess);
     }
 }

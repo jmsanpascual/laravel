@@ -92,8 +92,8 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'regions.*.permissions' => [
+            'required' => 'Region permissions are required.',
         ],
     ],
 

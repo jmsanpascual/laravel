@@ -29,6 +29,9 @@
               float: none;
               text-align: center;
             }
+            [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+              display: none !important;
+            }
         </style>
         @yield('links')
     </head>

@@ -21,7 +21,7 @@ class Role extends Model
         return $this->hasMany('App\User');
     }
 
-    public function scopeRole($query, $role)
+    public function scopeName($query, $role)
     {
         return $query->where('name', $role);
     }
