@@ -56,7 +56,7 @@
         <script src="{{ asset('node_modules/angular-datatables/dist/plugins/bootstrap/angular-datatables.bootstrap.js') }}"></script>
 
         <!-- Fixed Header Scripts for angular-datatables -->
-        <script src="{{ asset('node_modules/datatables/plugins/dataTables.fixedHeader.js') }}"></script>
+        <script src="{{ asset('node_modules/datatables/plugins/dataTables.fixedHeader.min.js') }}"></script>
         <script src="{{ asset('node_modules/angular-datatables/dist/plugins/fixedheader/angular-datatables.fixedheader.min.js') }}"></script>
 
         <!-- Application Scripts -->

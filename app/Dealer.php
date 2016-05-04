@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Permission extends Model
+class Dealer extends Model
 {
     /**
      * The attributes that should be hidden for arrays.
@@ -12,7 +12,7 @@ class Permission extends Model
      * @var array
      */
     protected $hidden = [
-        'created_at',
-        'updated_at',
+      'created_at',
+      'updated_at',
     ];
 }
