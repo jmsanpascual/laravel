@@ -14,7 +14,7 @@
 
     <div class="navbar-collapse" ng-class="{collapse: isCollapsed}">
       <ul class="nav navbar-nav">
-        @if (auth()->user()->role->name == 'Admin')
+        @if (auth()->user()->isAdmin())
           <li><a href="accounts">Admin</a></li>
         @endif
         <li><a href="infos">User</a></li>

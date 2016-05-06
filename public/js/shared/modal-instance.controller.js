@@ -22,10 +22,7 @@
         vm.inputs = inputs;
 
         vm.ok = function () {
-            $uibModalInstance.close({
-                inputs: vm.inputs,
-                options: vm.options
-            });
+            $uibModalInstance.close(vm.inputs);
         };
 
         vm.cancel = function () {

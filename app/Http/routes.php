@@ -13,7 +13,7 @@
 
 Route::get('/', function (App\Role $role) {
     if (Auth::check()) {
-        if (Auth::user()->role->name == 'Admin') {
+        if (Auth::user()->isAdmin()) {
             return redirect('accounts');
         } else {
             return redirect('infos');
@@ -31,7 +31,7 @@ Route::get('logout', 'AuthController@logout');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('accounts', function () {
-        if (Auth::user()->role->name != 'Admin') return view('errors.404');
+        if (!Auth::user()->isAdmin()) return view('errors.404');
         return view('accounts');
     });
 
@@ -41,15 +41,20 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 Route::group(['middleware' => ['auth', 'ajax']], function () {
+    Route::resource('dealer', 'DealerController');
+
     Route::resource('user', 'UserController', [
         'only' => ['index', 'store', 'update', 'destroy']
     ]);
+
     Route::resource('role', 'RoleController', [
         'only' => ['index']
     ]);
+
     Route::resource('region', 'RegionController', [
         'only' => ['index']
     ]);
+
     Route::resource('permission', 'PermissionController', [
         'only' => ['index']
     ]);

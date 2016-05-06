@@ -3,18 +3,17 @@
 namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
-use App\Role;
 
-class StoreUserRequest extends Request
+class StoreDealerRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
      */
-    public function authorize(Role $role)
+    public function authorize()
     {
-        return auth()->user()->isAdmin();
+        return true;
     }
 
     /**
@@ -25,11 +24,8 @@ class StoreUserRequest extends Request
     public function rules()
     {
         return [
-            'name' => 'required',
-            'username' => 'required|min:4|unique:users',
-            'password' => 'required|min:4',
-            'regions' => 'required',
-            'regions.*.permissions' => 'required',
+            'name' => 'required|min:3',
+            'region_id' => 'required',
         ];
     }
 }

@@ -39,8 +39,20 @@ class User extends Authenticatable
             ->withTimestamps();
     }
 
-    public function getUserWithRole()
+    public function isAdmin()
     {
-        return $this->where('id', $this->id)->with('role')->first();
+        return ($this->role->name === 'Admin');
+    }
+
+    public function getRegionsAndPermissions()
+    {
+        return $this->regions()->pluck('permission', 'regions.id');
+    }
+
+    public function getViewableRegionIds()
+    {
+        $viewPermission = config('constants.PERMISSIONS.VIEW');
+        return $this->regions()->where('permission', '&', $viewPermission)
+            ->pluck('regions.id');
     }
 }

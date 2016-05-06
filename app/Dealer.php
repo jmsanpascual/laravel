@@ -7,6 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 class Dealer extends Model
 {
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'name', 'region_id',
+    ];
+
+    /**
      * The attributes that should be hidden for arrays.
      *
      * @var array
@@ -15,4 +24,9 @@ class Dealer extends Model
       'created_at',
       'updated_at',
     ];
+
+    public function region()
+    {
+        return $this->belongsTo('App\Region');
+    }
 }

@@ -15,5 +15,7 @@ return [
 
     'failed' => 'These credentials do not match our records.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
-
+    'create' => 'Sorry, you\'re not allowed to create this :noun.',
+    'update' => 'Sorry, you\'re not allowed to update this :noun.',
+    'delete' => 'Sorry, you\'re not allowed to delete this :noun.',
 ];

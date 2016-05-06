@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use Auth;
-use App\Exceptions\ResponseException;
 
 class AuthController extends Controller
 {
@@ -15,6 +14,8 @@ class AuthController extends Controller
         $credentials = $request->all();
 
         if (Auth::attempt($credentials)) {
+            $regionsPermissions = Auth::user()->getRegionsAndPermissions();
+            session()->put('permissions', $regionsPermissions);
             return;
         } else {
             return ['error' => 'These credentials do not match our records.'];
@@ -24,6 +25,7 @@ class AuthController extends Controller
     public function logout()
     {
         Auth::logout();
+        session()->flush();
         return redirect('/');
     }
 }

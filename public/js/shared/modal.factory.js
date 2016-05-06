@@ -29,19 +29,18 @@
         function confirmation(name) {
             config.templateUrl = 'js/shared/confirmation-modal.html';
             config.resolve.options = callback({
-                title: 'Delete Confirmation'
+                title: 'Delete Confirmation',
+                name: name
             });
 
             return $uibModal.open(config).result;
         }
 
         function form(params) {
-            config.templateUrl = 'js/shared/form-modal.html';
+            config.templateUrl = params.templateUrl;
             config.resolve.defaults = callback(params.defaults);
             config.resolve.inputs = callback(params.inputs);
-            config.resolve.options = callback ({
-                title: 'Account Information'
-            });
+            config.resolve.options = callback (params.options);
 
             return $uibModal.open(config).result;
         }

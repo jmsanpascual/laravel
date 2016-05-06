@@ -14,7 +14,7 @@ class UpdateUserRequest extends Request
      */
     public function authorize(Role $role)
     {
-        return auth()->user()->role->name == 'Admin';
+        return auth()->user()->isAdmin();
     }
 
     /**
