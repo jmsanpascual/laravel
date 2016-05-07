@@ -1,3 +1,12 @@
+@section('links')
+<style>
+  /* Compliment for the navbar fixed top */
+  body {
+    padding-top: 55px;
+  }
+</style>
+@endsection
+
 <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -15,9 +24,10 @@
     <div class="navbar-collapse" ng-class="{collapse: isCollapsed}">
       <ul class="nav navbar-nav">
         @if (auth()->user()->isAdmin())
-          <li><a href="accounts">Admin</a></li>
+          <li><a href="accounts">Accounts</a></li>
         @endif
-        <li><a href="infos">User</a></li>
+        <li><a href="dealers">Dealers</a></li>
+        <li><a href="#">Couriers</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li uib-dropdown>

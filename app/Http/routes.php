@@ -11,12 +11,12 @@
 |
 */
 
-Route::get('/', function (App\Role $role) {
+Route::get('/', function () {
     if (Auth::check()) {
         if (Auth::user()->isAdmin()) {
             return redirect('accounts');
         } else {
-            return redirect('infos');
+            return redirect('dealers');
         }
     }
 
@@ -35,8 +35,8 @@ Route::group(['middleware' => 'auth'], function () {
         return view('accounts');
     });
 
-    Route::get('infos', function () {
-        return view('infos');
+    Route::get('dealers', function () {
+        return view('dealers');
     });
 });
 

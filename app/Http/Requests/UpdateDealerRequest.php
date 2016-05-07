@@ -30,6 +30,12 @@ class UpdateDealerRequest extends Request
         return [
             'name' => 'required|min:3',
             'region_id' => 'required',
+            'city' => 'required',
+            'province' => 'required',
+            'contact_person' => 'required',
+            'contact_number' => 'required',
+            'address_line_1' => 'required',
+            'address_line_2' => 'required',
         ];
     }
 

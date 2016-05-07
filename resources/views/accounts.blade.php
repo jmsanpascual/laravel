@@ -4,7 +4,9 @@
 Accounts
 @endsection
 
-@include('layouts.navbar')
+@section('navbar')
+  @include('layouts.navbar')
+@endsection
 
 @section('contents')
 <div class="container" ng-controller="AccountsController as ac">

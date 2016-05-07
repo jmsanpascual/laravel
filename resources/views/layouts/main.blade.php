@@ -2,6 +2,8 @@
 <html>
     <head>
         <title>@yield('title')</title>
+        <link rel="shortcut icon" href="{{ asset('img/favicon.png') }}" type="image/x-icon">
+        <link rel="icon" href="{{ asset('img/favicon.png') }}" type="image/x-icon">
         <link href="{{ asset('node_modules/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
         <link href="{{ asset('node_modules/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
 
@@ -12,30 +14,11 @@
         <link href="{{ asset('node_modules/angular-datatables/dist/plugins/bootstrap/datatables.bootstrap.min.css') }}" rel="stylesheet" type="text/css">
         <link rel="stylesheet" href="{{ asset('node_modules/datatables/plugins/fixedHeader.dataTables.min.css') }}">
         <link rel="stylesheet" href="{{ asset('node_modules/angular-ui-select/select.min.css') }}">
-
-        <style>
-            /* Compliment for the navbar fixed top */
-            body {
-                padding-top: 55px;
-            }
-            /* CSS to center the buttons in angular-datatable */
-            .dataTables_wrapper .dt-buttons {
-              float: none;
-              text-align: center;
-              display: block;
-              position: initial;
-            }
-            .btn-group-vertical>.btn, .btn-group>.btn {
-              float: none;
-              text-align: center;
-            }
-            [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
-              display: none !important;
-            }
-        </style>
+        <link rel="stylesheet" href="{{ asset('css/main.css') }}">
         @yield('links')
     </head>
     <body ng-app="app">
+        @yield('navbar')
         @yield('contents')
 
         <!-- Libraries and Frameworks -->

@@ -18,16 +18,48 @@ class RegionsTableSeeder extends Seeder
 
         $regions = [
             [
-                'name' => 'Philippines'
+                'name' => 'North Luzon',
+                'region_code' => 'NLU',
             ],
             [
-                'name' => 'America'
+                'name' => 'Central Luzon',
+                'region_code' => 'CLU',
             ],
             [
-                'name' => 'Japan'
+                'name' => 'South Luzon',
+                'region_code' => 'SLU',
             ],
             [
-                'name' => 'Europe'
+                'name' => 'Bicol',
+                'region_code' => 'BIC',
+            ],
+            [
+                'name' => 'Manila',
+                'region_code' => 'MNL',
+            ],
+            [
+                'name' => 'Iloilo',
+                'region_code' => 'ILO',
+            ],
+            [
+                'name' => 'Cebu',
+                'region_code' => 'CEB',
+            ],
+            [
+                'name' => 'Cagayan De Oro',
+                'region_code' => 'CDO',
+            ],
+            [
+                'name' => 'Davao',
+                'region_code' => 'DVO',
+            ],
+            [
+                'name' => 'Zamboanga',
+                'region_code' => 'ZMB',
+            ],
+            [
+                'name' => 'Island',
+                'region_code' => 'ISL',
             ],
         ];
 

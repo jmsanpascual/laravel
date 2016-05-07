@@ -28,8 +28,8 @@ class UpdateUserRequest extends Request
 
         return  [
             'name' => 'required',
-            'username' => 'required|min:4|unique:users,username,'.$id,
-            'password' => 'min:4',
+            'username' => 'required|min:3|unique:users,username,'.$id,
+            'password' => 'min:3',
             'regions' => 'required',
             'regions.*.permissions' => 'required',
         ];

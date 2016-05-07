@@ -19,13 +19,63 @@ class UserRegionAccessSeeder extends Seeder
 
         $regionAccess = [
             [
-                'user_id' => 2,
+                'user_id' => 3,
                 'region_id' => 1,
+                'permission' => 15,
+            ],
+            [
+                'user_id' => 4,
+                'region_id' => 2,
+                'permission' => 15,
+            ],
+            [
+                'user_id' => 5,
+                'region_id' => 3,
+                'permission' => 15,
+            ],
+            [
+                'user_id' => 6,
+                'region_id' => 4,
+                'permission' => 15,
+            ],
+            [
+                'user_id' => 7,
+                'region_id' => 5,
+                'permission' => 15,
+            ],
+            [
+                'user_id' => 8,
+                'region_id' => 6,
+                'permission' => 15,
+            ],
+            [
+                'user_id' => 9,
+                'region_id' => 7,
+                'permission' => 15,
+            ],
+            [
+                'user_id' => 10,
+                'region_id' => 8,
+                'permission' => 15,
+            ],
+            [
+                'user_id' => 11,
+                'region_id' => 9,
+                'permission' => 15,
+            ],
+            [
+                'user_id' => 12,
+                'region_id' => 10,
+                'permission' => 15,
+            ],
+            [
+                'user_id' => 13,
+                'region_id' => 11,
                 'permission' => 15,
             ],
         ];
 
-        for($i = 1; $i <= 4; $i++) {
+        for($i = 1; $i <= 11; $i++) {
             // Assign access to all regions to root user
             $rootUser = [
                 'user_id' => 1,
@@ -33,7 +83,14 @@ class UserRegionAccessSeeder extends Seeder
                 'permission' => 15,
             ];
 
+            $warehouse = [
+                'user_id' => 2,
+                'region_id' => $i,
+                'permission' => 8,
+            ];
+
             array_push($regionAccess, $rootUser);
+            array_push($regionAccess, $warehouse);
         }
 
         $now = DB::raw('CURRENT_TIMESTAMP');

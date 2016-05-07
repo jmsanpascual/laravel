@@ -64,9 +64,16 @@
                 ]);
 
             vm.dtColumns = [
-                DTColumnBuilder.newColumn('id').withTitle('Id'),
                 DTColumnBuilder.newColumn('name').withTitle('Name'),
                 DTColumnBuilder.newColumn('region.name').withTitle('Region'),
+                DTColumnBuilder.newColumn('city').withTitle('City'),
+                DTColumnBuilder.newColumn('province').withTitle('Province'),
+                DTColumnBuilder.newColumn('contact_person').withTitle('Contact Person'),
+                DTColumnBuilder.newColumn('contact_number').withTitle('Contact Number'),
+                DTColumnBuilder.newColumn('address_line_1').withTitle('Address 1')
+                    .notVisible(),
+                DTColumnBuilder.newColumn('address_line_2').withTitle('Address 2')
+                    .notVisible(),
                 DTColumnBuilder.newColumn(null).withTitle('Actions')
                     .notSortable().renderWith(actionsHtml)
             ];

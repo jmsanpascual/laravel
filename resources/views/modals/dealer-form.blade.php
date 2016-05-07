@@ -29,6 +29,42 @@
         </select>
       </div>
     </div>
+    <div class="form-group">
+      <label for="city" class="col-sm-2 control-label">City</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="city" placeholder="City" ng-model="vm.inputs.city">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="province" class="col-sm-2 control-label">Province</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="province" placeholder="Province" ng-model="vm.inputs.province">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="contact_person" class="col-sm-2 control-label">Contact Person</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="contact_person" placeholder="Contact Person" ng-model="vm.inputs.contact_person">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="contact_number" class="col-sm-2 control-label">Contact Number</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="contact_number" placeholder="Contact Number" ng-model="vm.inputs.contact_number">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="address1" class="col-sm-2 control-label">Address Line 1</label>
+      <div class="col-sm-10">
+        <textarea class="form-control" id="address1" placeholder="Address Line 1" style="resize:none;" ng-model="vm.inputs.address_line_1"></textarea>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="address2" class="col-sm-2 control-label">Address Line 2</label>
+      <div class="col-sm-10">
+        <textarea class="form-control" id="address2" placeholder="Address Line 2" style="resize:none;" ng-model="vm.inputs.address_line_2"></textarea>
+      </div>
+    </div>
   </form>
 </div>
 <div class="modal-footer">

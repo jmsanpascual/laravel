@@ -21,13 +21,79 @@ class UsersTableSeeder extends Seeder
                 'role_id' => 1,
                 'name' => 'Admin',
                 'username' => 'admin',
-                'password' => 'admin'
+                'password' => 'admin',
             ],
             [
                 'role_id' => 2,
-                'name' => 'User',
-                'username' => 'user',
-                'password' => 'user'
+                'name' => 'Warehouse',
+                'username' => 'warehouse',
+                'password' => 'warehouse',
+            ],
+            [
+                'role_id' => 2,
+                'name' => 'NLU',
+                'username' => 'nlu',
+                'password' => 'nlu',
+            ],
+            [
+                'role_id' => 2,
+                'name' => 'CLU',
+                'username' => 'clu',
+                'password' => 'clu',
+            ],
+            [
+                'role_id' => 2,
+                'name' => 'SLU',
+                'username' => 'slu',
+                'password' => 'slu',
+            ],
+            [
+                'role_id' => 2,
+                'name' => 'BIC',
+                'username' => 'bic',
+                'password' => 'bic',
+            ],
+            [
+                'role_id' => 2,
+                'name' => 'MNL',
+                'username' => 'mnl',
+                'password' => 'mnl',
+            ],
+            [
+                'role_id' => 2,
+                'name' => 'ILO',
+                'username' => 'ilo',
+                'password' => 'ilo',
+            ],
+            [
+                'role_id' => 2,
+                'name' => 'CEB',
+                'username' => 'ceb',
+                'password' => 'ceb',
+            ],
+            [
+                'role_id' => 2,
+                'name' => 'CDO',
+                'username' => 'cdo',
+                'password' => 'cdo',
+            ],
+            [
+                'role_id' => 2,
+                'name' => 'DVO',
+                'username' => 'dvo',
+                'password' => 'dvo',
+            ],
+            [
+                'role_id' => 2,
+                'name' => 'ZMB',
+                'username' => 'zmb',
+                'password' => 'zmb',
+            ],
+            [
+                'role_id' => 2,
+                'name' => 'ISL',
+                'username' => 'isl',
+                'password' => 'isl',
             ],
         ];
 
@@ -36,19 +102,6 @@ class UsersTableSeeder extends Seeder
             $users[$key]['created_at'] = $now;
             $users[$key]['updated_at'] = $now;
         }
-
-        // for ($i = 0; $i < 500; $i++) {
-        //     $temp = [
-        //         'role_id' => 2,
-        //         'name' => 'test',
-        //         'username' => 'test' . $i,
-        //         'password' => 'test',
-        //         'created_at' => $now,
-        //         'updated_at' => $now,
-        //     ];
-        //
-        //     array_push($users, $temp);
-        // }
 
         User::insert($users);
     }

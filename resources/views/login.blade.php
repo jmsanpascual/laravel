@@ -4,21 +4,18 @@
 Login
 @endsection
 
+@section('links')
+<link rel="stylesheet" type="text/css" href="{{ asset('css/login.css') }}"/>
+@endsection
+
 @section('contents')
-<div class="container" ng-controller="LoginController as lc">
-  <div class="row">
-    <div class="col-md-6 col-md-offset-3">
-      <form class="form-inline" ng-submit="lc.login(lc.credentials)">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Username" ng-model="lc.credentials.username">
-        </div>
-        <div class="form-group">
-          <input type="password" class="form-control" placeholder="Password" ng-model="lc.credentials.password">
-        </div>
-        <button type="submit" class="btn btn-default">Login</button>
-      </form>
-    </div>
-  </div>
+<div class="login" ng-controller="LoginController as lc">
+    <form ng-submit="lc.login(lc.dredentials)">
+        <img src="{{ asset('img/oppo_logo.png') }}">
+        <input type="text" class="form-control" id="username" placeholder="Username" required ng-model="lc.dredentials.username">
+        <input type="password" class="form-control" id="password" placeholder="Password" required ng-model="lc.dredentials.password">
+        <button type="submit" class="btn btn-info btn-block btn-large">Login</button>
+    </form>
 </div>
 @endsection
 

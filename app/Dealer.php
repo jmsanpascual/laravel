@@ -12,7 +12,14 @@ class Dealer extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'region_id',
+        'name',
+        'region_id',
+        'city',
+        'province',
+        'contact_person',
+        'contact_number',
+        'address_line_1',
+        'address_line_2',
     ];
 
     /**

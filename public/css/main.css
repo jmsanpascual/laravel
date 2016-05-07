@@ -1,0 +1,20 @@
+/* CSS to center the buttons in angular-datatable */
+.dataTables_wrapper .dt-buttons {
+  float: none;
+  text-align: center;
+  display: block;
+  position: initial;
+}
+.btn-group-vertical > .btn,
+.btn-group > .btn {
+  float: none;
+  text-align: center;
+}
+[ng\:cloak],
+[ng-cloak],
+[data-ng-cloak],
+[x-ng-cloak],
+.ng-cloak,
+.x-ng-cloak {
+  display: none !important;
+}
