@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
 
-class UpdateUserRequest extends Request
+class UpdateRegionRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,14 +23,9 @@ class UpdateUserRequest extends Request
      */
     public function rules()
     {
-        $id = $this->user;
-
-        return  [
+        return [
             'name' => 'required',
-            'username' => 'required|min:3|unique:users,username,'.$id,
-            'password' => 'min:3',
-            'regions' => 'required',
-            'regions.*.permissions' => 'required',
+            'region_code' => 'required',
         ];
     }
 }

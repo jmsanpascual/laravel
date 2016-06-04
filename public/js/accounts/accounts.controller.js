@@ -168,7 +168,7 @@
                     toast.error(errorMsg);
                 });
             });
-        }
+        };
 
         vm.delete = function (user) {
             modal.confirmation(user.name).then(function () {
@@ -181,6 +181,6 @@
                     toast.error(errorMsg);
                 });
             });
-        }
+        };
     }
 })();

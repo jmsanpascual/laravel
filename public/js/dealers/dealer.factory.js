@@ -12,6 +12,10 @@
         var resource = new $resource('dealer/:id', {id: '@id'}, {
             update: {
                 method: 'PUT'
+            },
+            export: {
+                url: 'dealer/export',
+                method: 'POST'
             }
         });
 

@@ -18,6 +18,7 @@ Dealers
 @section('scripts')
 <script src="{{ asset('js/dealers/dealers.controller.js') }}"></script>
 <script src="{{ asset('js/dealers/dealer.factory.js') }}"></script>
+<script src="{{ asset('js/couriers/courier.factory.js') }}"></script>
 <script src="{{ asset('js/shared/modal-instance.controller.js') }}"></script>
 <script src="{{ asset('js/shared/modal.factory.js') }}"></script>
 @endsection

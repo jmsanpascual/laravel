@@ -15,7 +15,6 @@ class CreateDealersTable extends Migration
         Schema::create('dealers', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 50);
-            $table->string('code', 15);
             $table->integer('region_id')->unsigned()->index();
             $table->foreign('region_id')->references('id')->on('regions')
                 ->onDelete('cascade');

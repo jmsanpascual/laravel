@@ -10,6 +10,12 @@
       </div>
     </div>
     <div class="form-group">
+      <label for="courier" class="col-sm-2 control-label">Courier</label>
+      <div class="col-sm-10">
+        <select class="form-control" id="courier" ng-options="courier.id as courier.name for courier in vm.defaults.couriers" ng-model="vm.inputs.courier_id"></select>
+      </div>
+    </div>
+    <div class="form-group">
       <label for="region" class="col-sm-2 control-label">Region</label>
       <div class="col-sm-10">
         <select class="form-control" id="region" ng-model="vm.inputs.region_id">

@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Requests\StoreDealerRequest;
 use App\Http\Requests\UpdateDealerRequest;
 use App\Dealer;
+use Excel;
 
 class DealerController extends Controller
 {
@@ -30,7 +31,7 @@ class DealerController extends Controller
         // Return only the dealers that match the regions of the
         // current user with view permission
         $regionIds = $this->user->getViewableRegionIds();
-        return $this->dealer->with('region')
+        return $this->dealer->with('region', 'courier')
             ->whereIn('region_id', $regionIds)->get();
     }
 
@@ -95,7 +96,7 @@ class DealerController extends Controller
     {
         $dealer = $this->dealer->find($id);
 
-        $dealerInfo = $request->except('region');
+        $dealerInfo = $request->except('region', 'courier');
         $dealer->fill($dealerInfo);
         $dealer->save();
 
@@ -113,14 +114,24 @@ class DealerController extends Controller
     {
         $dealer = $this->dealer->find($id);
 
-        if ($this->user->cannot('delete-dealer', $dealer)) {
+        if ($this->user->cannot('delete', $dealer)) {
             $error = trans('auth.delete', ['noun' => 'dealer']);
             return compact('error');
         }
 
         $dealer->delete();
 
-        $message = trans('messages.delete', ['name' => $user->name]);
+        $message = trans('messages.delete', ['name' => $dealer->name]);
         return compact('message');
+    }
+
+    public function export(Request $request)
+    {
+        Excel::load('img/test.xlsx', function ($excel) {
+            $sheet = $excel->getActiveSheet();
+            $sheet->setCellValue('B7', 'Company Name');
+        })->save('xlsx', 'img');
+
+        return;
     }
 }

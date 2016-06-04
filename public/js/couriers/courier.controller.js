@@ -3,46 +3,36 @@
 
     angular
         .module('app')
-        .controller('DealersController', DealersController);
+        .controller('CourierController', CourierController);
 
-    DealersController.$inject = [
+    CourierController.$inject = [
         '$scope',
         '$compile',
         '$cookies',
         'DTOptionsBuilder',
         'DTColumnBuilder',
-        'Dealer',
         'Courier',
         'modal',
         'toast'
     ];
 
     /* @ngInject */
-    function DealersController($scope, $compile, $cookies, DTOptionsBuilder,
-        DTColumnBuilder, Dealer, Courier, modal, toast) {
+    function CourierController($scope, $compile, $cookies, DTOptionsBuilder,
+        DTColumnBuilder, Courier, modal, toast) {
 
         var vm = this;
-        var defaults = {};
 
-        vm.dealers = {};
+        vm.title = '';
+        vm.couriers = {};
+        vm.template = {};
         vm.dtInstance = {};
+        vm.upload = {show: false};
 
         activate();
 
         function activate() {
             vm.dtOptions = DTOptionsBuilder
-                .fromFnPromise(getDealers)
-                // .newOptions()
-                // .withOption('ajax', {
-                //      dataSrc: 'data',
-                //      url: 'user',
-                //      type: 'POST',
-                //      headers: {
-                //         'X-XSRF-TOKEN': $cookies.get('XSRF-TOKEN')
-                //      }
-                //  })
-                // .withOption('processing', true)
-                // .withOption('serverSide', true)
+                .fromFnPromise(getCouriers)
                 .withDOM('lfBrtip') // Position the buttons in the center
                 .withPaginationType('full_numbers')
                 .withOption('createdRow', createdRow)
@@ -59,53 +49,36 @@
                 .withButtons([
                     'colvis',
                     {
-                        text: 'Add Dealer',
+                        text: 'Add Courier',
                         key: '1',
-                        action: addDealer
-                    }
+                        action: addCourier
+                    },
                 ]);
 
             vm.dtColumns = [
                 DTColumnBuilder.newColumn('name').withTitle('Name'),
-                DTColumnBuilder.newColumn('courier.name').withTitle('Courier'),
-                DTColumnBuilder.newColumn('region.name').withTitle('Region'),
-                DTColumnBuilder.newColumn('city').withTitle('City'),
-                DTColumnBuilder.newColumn('province').withTitle('Province'),
-                DTColumnBuilder.newColumn('contact_person').withTitle('Contact Person'),
-                DTColumnBuilder.newColumn('contact_number').withTitle('Contact Number'),
-                DTColumnBuilder.newColumn('address_line_1').withTitle('Address 1')
-                    .notVisible(),
-                DTColumnBuilder.newColumn('address_line_2').withTitle('Address 2')
-                    .notVisible(),
+                DTColumnBuilder.newColumn('account_number').withTitle('Account No'),
                 DTColumnBuilder.newColumn(null).withTitle('Actions')
                     .notSortable().renderWith(actionsHtml)
             ];
 
-            Courier.query().$promise.then(function (couriers) {
-                defaults.couriers = couriers;
-            });
-
-            function getDealers() {
-                return Dealer.query().$promise;
+            function getCouriers() {
+                return Courier.query().$promise;
             }
 
-            function addDealer() {
+            function addCourier() {
                 var params = {
-                    templateUrl: 'dealer/create',
-                    defaults: defaults,
-                    inputs: {
-                        courier_id: defaults.couriers[0].id
-                    },
+                    templateUrl: 'courier/create',
                     options: {
-                        title: 'Create Dealer Information'
+                        title: 'Create Courier Information'
                     }
                 };
 
                 modal.form(params).then(function (result) {
-                    // Instantiate a new dealer to be saved
-                    var newDealer = new Dealer(result);
+                    // Instantiate a new Courier to be saved
+                    var newCourier = new Courier(result);
 
-                    newDealer.$save(function (response) {
+                    newCourier.$save(function (response) {
                         vm.dtInstance.reloadData(angular.noop, false);
                         toast.success(response.message);
                     }, function (errorMsg) {
@@ -120,26 +93,26 @@
             }
 
             function actionsHtml(data, type, full, meta) {
-                vm.dealers[data.id] = data;
-                return '<button class="btn btn-success" ng-click="dc.edit(dc.dealers[' + data.id + '])">' +
+                vm.couriers[data.id] = data;
+                return '<button class="btn btn-success" ng-click="cc.edit(cc.couriers[' + data.id + '])">' +
                     '   <i class="fa fa-edit"></i>' +
                     '</button>&nbsp;' +
-                    '<button class="btn btn-info" ng-click="dc.export(dc.dealers[' + data.id + '])" )"="">' +
-                    '   <i class="fa fa-print"></i>' +
+                    '<button class="btn btn-info" ng-click="cc.addTemplate(cc.couriers[' + data.id + '])" )"="">' +
+                    '   <i class="fa fa-upload"></i>' +
                     '</button>&nbsp;' +
-                    '<button class="btn btn-danger" ng-click="dc.delete(dc.dealers[' + data.id + '])" )"="">' +
+                    '<button class="btn btn-danger" ng-click="cc.delete(cc.couriers[' + data.id + '])" )"="">' +
                     '   <i class="fa fa-trash-o"></i>' +
                     '</button>';
+
             }
         }
 
-        vm.edit = function (dealer) {
+        vm.edit = function (courier) {
             var params = {
-                templateUrl: 'dealer/' + dealer.id + '/edit',
-                defaults: defaults,
-                inputs: angular.copy(dealer),
+                templateUrl: 'courier/' + courier.id + '/edit',
+                inputs: angular.copy(courier),
                 options: {
-                    title: 'Edit Dealer Information'
+                    title: 'Edit Courier Information'
                 }
             };
 
@@ -147,9 +120,9 @@
             // then reload the data so that DT is refreshed
             modal.form(params).then(function (result) {
                 // Get the instance of the user to be updated
-                dealer = result;
+                courier = result;
 
-                dealer.$update().then(function (response) {
+                courier.$update().then(function (response) {
                     vm.dtInstance.reloadData(angular.noop, false);
                     toast.success(response.message);
                 }, function (errorMsg) {
@@ -158,17 +131,27 @@
             });
         };
 
-        vm.export = function (dealer) {
-            dealer.$export().then(function () {
-                window.open('img/test.xlsx','_blank' );
+        vm.addTemplate = function (courier) {
+            vm.title = 'Upload Template for ' + courier.name;
+            vm.template.courier_id = courier.id;
+            vm.upload.show = true;
+        };
+
+        vm.uploadTemplate = function (template) {
+            Courier.uploadTemplate(template).$promise.then(function (response) {
+                vm.template = {}; // Reset the template variable
+                vm.upload.show = false;
+                toast.success(response.message);
+            }, function (errorMsg) {
+                toast.error(errorMsg);
             });
         };
 
-        vm.delete = function (dealer) {
-            modal.confirmation(dealer.name).then(function () {
+        vm.delete = function (courier) {
+            modal.confirmation(courier.name).then(function () {
                 // Delete some data and call server to make changes,
                 // then reload the data so that DT is refreshed
-                dealer.$delete().then(function (response) {
+                courier.$delete().then(function (response) {
                     vm.dtInstance.reloadData(angular.noop, false);
                     toast.success(response.message);
                 }, function (errorMsg) {

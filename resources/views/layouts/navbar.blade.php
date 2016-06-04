@@ -8,61 +8,10 @@
   img {
     width: 169px;
   }
-
-  #custom-bootstrap-menu.navbar-default .navbar-brand {
-    color: rgba(119, 119, 119, 1);
-  }
-
-  #custom-bootstrap-menu.navbar-default {
-      font-size: 14px;
-      background-color: rgba(0, 153, 102, 1);
-      background: -webkit-linear-gradient(top, rgba(53, 191, 147, 1) 0%, rgba(0, 153, 102, 1) 100%);
-      background: linear-gradient(to bottom, rgba(53, 191, 147, 1) 0%, rgba(0, 153, 102, 1) 100%);
-      border-width: 1px;
-      border-radius: 4px;
-  }
-
-  #custom-bootstrap-menu.navbar-default .navbar-nav>li>a {
-      color: rgba(0, 0, 0, 1);
-      background-color: rgba(248, 248, 248, 0);
-  }
-
-  #custom-bootstrap-menu.navbar-default .navbar-nav>li>a:hover,
-  #custom-bootstrap-menu.navbar-default .navbar-nav>li>a:focus {
-      color: rgba(255, 255, 255, 1);
-      background-color: rgba(248, 248, 248, 0);
-  }
-
-  #custom-bootstrap-menu.navbar-default .navbar-nav>.active>a,
-  #custom-bootstrap-menu.navbar-default .navbar-nav>.active>a:hover,
-  #custom-bootstrap-menu.navbar-default .navbar-nav>.active>a:focus {
-      color: rgba(255, 255, 255, 1);
-      background-color: rgba(0, 153, 102, 1);
-      background: -webkit-linear-gradient(top, rgba(53, 191, 147, 1) 0%, rgba(0, 153, 102, 1) 100%);
-      background: linear-gradient(to bottom, rgba(53, 191, 147, 1) 0%, rgba(0, 153, 102, 1) 100%);
-  }
-
-  #custom-bootstrap-menu.navbar-default .navbar-toggle {
-      border-color: #009966;
-  }
-
-  #custom-bootstrap-menu.navbar-default .navbar-toggle:hover,
-  #custom-bootstrap-menu.navbar-default .navbar-toggle:focus {
-      background-color: #009966;
-  }
-
-  #custom-bootstrap-menu.navbar-default .navbar-toggle .icon-bar {
-      background-color: #009966;
-  }
-
-  #custom-bootstrap-menu.navbar-default .navbar-toggle:hover .icon-bar,
-  #custom-bootstrap-menu.navbar-default .navbar-toggle:focus .icon-bar {
-      background-color: #009966;
-  }
 </style>
 @endsection
 
-<nav id="custom-bootstrap-menu" class="navbar navbar-default navbar-fixed-top">
+<nav class="navbar navbar-default navbar-fixed-top">
   <div class="container-fluid">
     <div class="navbar-header">
       <button class="navbar-toggle btn navbar-btn" type="button" ng-init="isCollapsed = true" ng-click="isCollapsed = !isCollapsed">
@@ -80,9 +29,11 @@
       <ul class="nav navbar-nav">
         @if (auth()->user()->isAdmin())
           <li><a href="accounts">Accounts</a></li>
+          <li><a href="accounts">Company</a></li>
+          <li><a href="regions">Regions</a></li>
         @endif
         <li><a href="dealers">Dealers</a></li>
-        <li><a href="#">Couriers</a></li>
+        <li><a href="couriers">Couriers</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li uib-dropdown>

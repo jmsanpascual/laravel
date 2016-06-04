@@ -3,7 +3,6 @@
 namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
-use App\Role;
 
 class StoreUserRequest extends Request
 {
@@ -12,7 +11,7 @@ class StoreUserRequest extends Request
      *
      * @return bool
      */
-    public function authorize(Role $role)
+    public function authorize()
     {
         return auth()->user()->isAdmin();
     }

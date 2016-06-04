@@ -38,20 +38,30 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('dealers', function () {
         return view('dealers');
     });
+
+    Route::get('couriers', function () {
+        return view('couriers');
+    });
+
+    Route::get('regions', function () {
+        return view('regions');
+    });
 });
 
 Route::group(['middleware' => ['auth', 'ajax']], function () {
+    Route::post('dealer/export', 'DealerController@export');
     Route::resource('dealer', 'DealerController');
+
+    Route::post('courier/upload-template', 'CourierController@uploadTemplate');
+    Route::resource('courier', 'CourierController');
+
+    Route::resource('region', 'RegionController');
 
     Route::resource('user', 'UserController', [
         'only' => ['index', 'store', 'update', 'destroy']
     ]);
 
     Route::resource('role', 'RoleController', [
-        'only' => ['index']
-    ]);
-
-    Route::resource('region', 'RegionController', [
         'only' => ['index']
     ]);
 

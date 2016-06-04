@@ -13,6 +13,7 @@ class Dealer extends Model
      */
     protected $fillable = [
         'name',
+        'courier_id',
         'region_id',
         'city',
         'province',
@@ -35,5 +36,10 @@ class Dealer extends Model
     public function region()
     {
         return $this->belongsTo('App\Region');
+    }
+
+    public function courier()
+    {
+        return $this->belongsTo('App\Courier');
     }
 }
