@@ -159,8 +159,10 @@
         };
 
         vm.export = function (dealer) {
-            dealer.$export().then(function () {
-                window.open('img/test.xlsx','_blank' );
+            Dealer.export(dealer).$promise.then(function (response) {
+                window.open(response.downloadPath, '_blank' );
+            }, function (errorMsg) {
+                toast.error(errorMsg);
             });
         };
 

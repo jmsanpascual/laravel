@@ -25,4 +25,8 @@ class Courier extends Model
       'created_at',
       'updated_at',
     ];
+
+    protected $casts = [
+        'template_fields' => 'array',
+    ];
 }

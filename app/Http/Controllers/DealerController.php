@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Requests\StoreDealerRequest;
 use App\Http\Requests\UpdateDealerRequest;
 use App\Dealer;
+use App\Courier;
 use Excel;
 
 class DealerController extends Controller
@@ -127,11 +128,32 @@ class DealerController extends Controller
 
     public function export(Request $request)
     {
-        Excel::load('img/test.xlsx', function ($excel) {
-            $sheet = $excel->getActiveSheet();
-            $sheet->setCellValue('B7', 'Company Name');
-        })->save('xlsx', 'img');
+        $dealer = $request->except('courier');
+        $courier = $request->only('courier')['courier'];
 
-        return;
+        // Get the uploaded template path
+        $template = $courier['template_path'];
+         // Path to store the template to be downloaded
+        $downloadPath = 'courier_templates/download';
+
+        // Check if a template is available for the courier selected for the dealer
+        if (empty($template)) {
+            $error = trans('errors.template_unavailable', ['name' => $courier['name']]);
+            return compact('error');
+        }
+
+        // Open and edit the template using the selected dealer values
+        Excel::load($template, function ($excel) use ($courier, $dealer) {
+            $sheet = $excel->getActiveSheet();
+
+            // Set the cell according to the template
+            foreach ($courier['template_fields'] as $key => $cell) {
+                $sheet->setCellValue($cell, $dealer[$key]);
+            }
+        })->save('xls', $downloadPath);
+
+        // Return the path for download
+        $downloadPath .= '/'.$courier['name'].'.xls';
+        return compact('downloadPath');
     }
 }

@@ -133,6 +133,7 @@
 
         vm.addTemplate = function (courier) {
             vm.title = 'Upload Template for ' + courier.name;
+            vm.template = courier.template_fields || {};
             vm.template.courier_id = courier.id;
             vm.upload.show = true;
         };

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Requests\StoreCourierRequest;
 use App\Http\Requests\UpdateCourierRequest;
+use App\Http\Requests\UploadCourierTemplateRequest;
 use App\Courier;
 use Excel;
 
@@ -112,7 +113,7 @@ class CourierController extends Controller
         return compact('message');
     }
 
-    public function uploadTemplate(Request $request)
+    public function uploadTemplate(UploadCourierTemplateRequest $request)
     {
         $courierId = $request->only('courier_id');
         $template = $request->except('excel', 'courier_id');
@@ -130,7 +131,7 @@ class CourierController extends Controller
 
         // Update the courier with the uploaded template
         $courier->template_path = $path.'/'.$fileName;
-        $courier->template_fields = json_encode($template);
+        $courier->template_fields = $template;
         $courier->save();
 
         $message = trans('messages.upload', ['name' => $courier->name]);
